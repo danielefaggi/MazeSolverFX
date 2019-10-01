@@ -21,29 +21,29 @@ public class MazeSolver {
 
     private List<List<FieldCoord>> mSolutions;
 
-    /// <summary>
-    /// Public constructor, it gets the grid on which work on
-    /// </summary>
-    /// <param name="fieldgrid"></param>
+    /**
+     * Public constructor, it gets the grid on which work on
+     * @param fieldgrid the grid on which work on
+     */
     public MazeSolver(FieldGrid fieldgrid)
     {
         mGrid = fieldgrid;
         mSolutions = new ArrayList<List<FieldCoord>>();
     }
 
-    /// <summary>
-    /// Get the solutions in order of match
-    /// </summary>
-    /// <returns>The list containing the solutions</returns>
+    /**
+     * Get the solutions in order of match
+     * @return The list containing the solutions
+     */
     public List<List<FieldCoord>> GetSolutions()
     {
         return mSolutions;
     }
 
-    /// <summary>
-    /// Gets the solutions in order of number of steps
-    /// </summary>
-    /// <returns>The list conaining the solutions</returns>
+    /**
+     * Gets the solutions in order of number of steps
+     * @return The list conaining the solutions
+     */
     public List<List<FieldCoord>> GetSortedSolutions()
     {
         List <List<FieldCoord>> s = new ArrayList<List<FieldCoord>>(mSolutions);
@@ -52,7 +52,12 @@ public class MazeSolver {
         return s;
     }
 
-    private FieldCoord FindFieldElement(FieldElement element)
+    /**
+     * Find an element in the grid and returns its coordinates
+     * @param element the element to be found
+     * @return the FieldCoord of the element
+     */
+    private FieldCoord findFieldElement(FieldElement element)
     {
         for(int r = 0; r < mGrid.getRows(); r++)
         {
@@ -68,11 +73,14 @@ public class MazeSolver {
         return null;
     }
 
+    /**
+     * Start the solution of the maze
+     */
     public void solve()
     {
-        mStart = FindFieldElement(FieldElement.Start);
+        mStart = findFieldElement(FieldElement.Start);
 
-        mFinish = FindFieldElement(FieldElement.Finish);
+        mFinish = findFieldElement(FieldElement.Finish);
 
         if (mStart == null || mFinish == null) return;
 
@@ -82,6 +90,11 @@ public class MazeSolver {
         processNode(mStart, path);
     }
 
+    /**
+     * Get the cells of the border of the current cell
+     * @param node the cell owning the border
+     * @return the FieldCoord list of the cell of the border
+     */
     private List<FieldCoord> getBorder(FieldCoord node)
     {
         List<FieldCoord> border = new ArrayList<FieldCoord>();
@@ -129,6 +142,11 @@ public class MazeSolver {
         return border;
     }
 
+    /**
+     * Process a cell (or node)
+     * @param node the current cell
+     * @param path the path travelled so far
+     */
     public void processNode(FieldCoord node, List<FieldCoord> path)
     {
         List<FieldCoord> border = getBorder(node);

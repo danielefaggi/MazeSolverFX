@@ -23,8 +23,13 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 
+/**
+ * The Java FX controller of the form
+ * @author Utente
+ */
 public class FXMLController implements Initializable {
     
+    // Controls
     @FXML
     private Pane panRoot;
     @FXML
@@ -48,19 +53,28 @@ public class FXMLController implements Initializable {
     @FXML
     private Button butSave;
     
+    // Helper element
     private FieldElement mPaintElement = null;
-    
+    // The maze grid
     private FieldGrid mFieldGrid;
     
+    // Size of each cell
     private int mSquareSizeX = 10;
     private int mSquareSizeY = 10;
     
+    // How many rows and columns of cell are inside the grid
     private int mRows;
     private int mCols;
     
     // The solver is attached here
     private MazeSolver mSolver = null;
     
+    /**
+     * Inizializer of the form
+     * 
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
                 
@@ -87,7 +101,10 @@ public class FXMLController implements Initializable {
         
         updateGrid();
     }    
-            
+    
+    /**
+     * Update the displayed grid
+     */
     private void updateGrid()
     {
         
@@ -164,6 +181,7 @@ public class FXMLController implements Initializable {
                 
     }   
     
+    // Spinner events
     @FXML
     private void spinRows_Changed() {
         
@@ -178,6 +196,7 @@ public class FXMLController implements Initializable {
         updateGrid();
     }
     
+    // Mouse events
     @FXML
     private void panGrid_MousePressed(MouseEvent event) {
         
@@ -230,6 +249,7 @@ public class FXMLController implements Initializable {
         mPaintElement = null;
     }
     
+    // Toggle buttons events
     @FXML
     private void togWall_Action(Event args) {
         if(togWall.isSelected()) {
@@ -260,6 +280,7 @@ public class FXMLController implements Initializable {
         }        
     }
 
+    // Button to perform operations
     @FXML
     private void butSolve_Action(Event args) {
         

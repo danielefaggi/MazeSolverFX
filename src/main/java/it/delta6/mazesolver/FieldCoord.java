@@ -14,7 +14,11 @@ public class FieldCoord {
     private int mRow;
     private int mCol;
 
-       
+    /**
+     * Public constructor of FieldCoord
+     * @param row Referenced Row
+     * @param col Referenced Column
+     */   
     public FieldCoord(int row, int col)
     {
         this.setRow(row);
@@ -22,28 +26,28 @@ public class FieldCoord {
     }
 
     /**
-     * @return the mRow
+     * @return the Row
      */
     public int getRow() {
         return mRow;
     }
 
     /**
-     * @param mRow the mRow to set
+     * @param mRow the Row to set
      */
     public void setRow(int mRow) {
         this.mRow = mRow;
     }
 
     /**
-     * @return the mCol
+     * @return the Col
      */
     public int getCol() {
         return mCol;
     }
 
     /**
-     * @param mCol the mCol to set
+     * @param mCol the Col to set
      */
     public void setCol(int mCol) {
         this.mCol = mCol;
