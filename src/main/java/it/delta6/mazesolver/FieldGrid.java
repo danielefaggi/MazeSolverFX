@@ -60,7 +60,7 @@ public class FieldGrid {
      * @param col Column coordinate
      * @param element Element to be assigned to cell
      */    
-    public void SetCell(int row, int col, FieldElement element) {
+    public void setCell(int row, int col, FieldElement element) {
         if (row < mGrid.length && col < mGrid[0].length && row >= 0 && col >= 0) {
                 mGrid[row][col] = element;
         }
