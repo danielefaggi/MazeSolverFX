@@ -60,6 +60,9 @@ public class FXMLController implements Initializable {
     private int mRows;
     private int mCols;
     
+    // The solver is attached here
+    private MazeSolver mSolver = null;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
                 
@@ -99,6 +102,22 @@ public class FXMLController implements Initializable {
         panGrid.setPrefSize((double)sizex, (double) sizey);
         
         panGrid.getChildren().clear();
+
+        if(mSolver != null) {
+            if(mSolver.GetSolutions().toArray().length > 0) {
+                for(FieldCoord fc:mSolver.GetSolutions().get(0)) {
+                                        
+                    Rectangle rect = new Rectangle(mSquareSizeX, mSquareSizeY);
+                    rect.setX(fc.getCol() * mSquareSizeX);
+                    rect.setY(fc.getRow() * mSquareSizeY);
+                    rect.setFill(Color.YELLOW);
+                    rect.setMouseTransparent(true);
+                    panGrid.getChildren().add(rect);
+                    
+                            
+                }
+            }
+        }
 
         for(int r = 0;r < mRows+1;r++) {
             for(int c = 0;c < mCols+1; c++) {
@@ -144,8 +163,7 @@ public class FXMLController implements Initializable {
             line.setEndY((double)sizey);
             panGrid.getChildren().add(line);
         }
-        
-        
+                
     }   
     
     @FXML
@@ -247,11 +265,20 @@ public class FXMLController implements Initializable {
     @FXML
     private void butSolve_Action(Event args) {
         
+        mSolver = new MazeSolver(mFieldGrid);
+
+        mSolver.solve();
+        
+        updateGrid();
+        
     }
     
     @FXML
     private void butClear_Action(Event args) {
+     
+        mSolver = null;
         
+        updateGrid();
     }
     
     @FXML
